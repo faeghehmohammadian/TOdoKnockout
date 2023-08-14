@@ -3,7 +3,7 @@ function todoModel(todoText){
     self.todoText=todoText;
     self.isActive = ko.observable(true);
     self.isComplete = ko.observable(false);
-    self.isVisible= ko.observable(false);
+    self.isVisible= ko.observable(true);
 }
 const inputTodoText=document.querySelector('.inputTodoText');
 
@@ -24,21 +24,21 @@ function todoappViewModel(){
         
         self.chosenMenuId(menu); 
         if(menu=='All'){
+            self.inputVisible(true);
             self.todoList().forEach(function (todo) {
                 todo.isVisible(true);
         })
         }
         if(menu=='Active'){
             self.inputVisible(false);
-            console.log("Active")
             self.todoList().forEach(function (todo) {
-                todo.isVisible(todo.isActive(true));
+                todo.isVisible(todo.isComplete()==false);
             });
         }
         if(menu=='Completed'){
             self.inputVisible(false);
             self.todoList().forEach(function (todo) {
-                todo.isVisible(todo.isComplete(true));
+                todo.isVisible(todo.isComplete()==true);
             });
         }
     }
