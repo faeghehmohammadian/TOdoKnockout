@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scss/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h2>TOdo List</h2>
+    <ul class="menus" data-bind="foreach:menus">
+        <li data-bind="text: $data, 
+                css: { selected: $data == $root.chosenMenuId() },
+                click: $root.goToFolder"></li>
+    </ul>
+    <div class="maininput">
+        <input class="inputTodoText" value="">
+        <button data-bind="click:addFunction">Add</button>
+        <div class="List" data-bind="foreach:todoList" >
+            <input id="inputs" data-bind="value:todoText , disable: isActive ,css:{completetodo:isComplete}">
+            <button data-bind="click:$parent.editable">Edit</button>
+            <button data-bind="click:$parent.saveItem">Save</button>
+            <button data-bind="click:$root.makeComplete">Done</button>
+            <button data-bind="click:$root.deleteTodo">Delete</button>
+        </div>
+    </div>
+
+    
+    <script src="js/knockout-3.5.1.js"></script>
+    <script src="js/knockout.js"></script>
+</body>
+</html>

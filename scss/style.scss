@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    h2{
+        background-color: aquamarine;
+        text-align: center;
+        padding: 30px;
+    }
+}
+.menus{
+    height: 40px;
+    display: flex;
+    border:1px solid lightgray;
+    border-radius: 5px;
+    list-style: none;
+    background-color:aquamarine;
+    align-items: center;
+    
+}
+.menus{
+    li{
+        width: 100px;
+        padding: 10px;
+        border: solid 1px lightgray;
+        text-align: center;
+    
+    }
+}
+.selected{
+    background-color: white;
+}
+.maininput{
+    input{
+        font-size: 1em;
+        width: 70vw;
+        height: 40px;
+        margin: 20px;
+        border-radius: 8px;
+        padding-left: 10px;
+    }
+    button{
+        padding: 10px;
+    }
+}
+
+.List{
+    input{
+        font-size: 1em;
+        width: 60vw;
+        height: 10vh;
+        margin: 5px 20px;
+        border-radius: 8px;
+    }
+    button{
+        padding: 10px;
+    }
+}
+.completetodo{
+    text-decoration:line-through;
+    background-color: black;
+    color: white;
+}
