@@ -7,6 +7,10 @@
 </head>
 <body>
     <h2>TOdo List</h2>
+    <div class="menus">
+        <button id="Upload" data-bind="click:$root.uploadfunction">UPload</button>
+        <button id="Download" data-bind="click:$root.downloadfunction">Download</button>
+    </div>
     <ul class="menus" data-bind="foreach:menus">
         <li data-bind="text: $data, 
                 css: { selected: $data == $root.chosenMenuId() },
@@ -28,8 +32,8 @@
         <button id="Del" data-bind="click:$root.deleteTodo">Delete</button>
         </div>
     </div>
-    
     <script src="js/knockout-3.5.1.js"></script>
     <script src="js/knockout.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

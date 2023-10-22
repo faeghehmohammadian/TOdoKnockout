@@ -1,0 +1,14 @@
+[
+    {
+        "todo": "Read about Python",
+        "completed": false
+    },
+    {
+        "todo": "Read about Java",
+        "completed": false
+    },
+    {
+        "todo": "Read about C++",
+        "completed": false
+    }
+]

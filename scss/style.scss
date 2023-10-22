@@ -5,6 +5,7 @@
     font-size: 20px;
 }
 body{
+    
     width: 60%;
     margin: auto;
     border: 5px solid aquamarine;
@@ -89,4 +90,8 @@ body{
     text-decoration:line-through;
     background-color: rgb(161, 158, 158);
     color: white;
+}
+.load{
+    display: flex;
+    justify-content: end;
 }
