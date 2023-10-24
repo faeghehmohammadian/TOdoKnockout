@@ -80,7 +80,6 @@ function todoappViewModel(){
         }
     })
     self.uploadfunction=function(){
-        localStorage.clear();
         const request = new XMLHttpRequest();
         request.open('GET', 'file/data.json');
         request.send();
@@ -90,12 +89,25 @@ function todoappViewModel(){
             for(let i=0;i<items.length;i++){
                 localStorage.setItem(items[i].todo,items[i].completed)
                 self.todoList.push(new todoModel(localStorage.key(i),localStorage.getItem(localStorage.key(i))))
-            }
+            }    
         }
-
     }
     self.downloadfunction=function(){
-        
+        let tasks=[];
+        for (i = 0; i < localStorage.length; i++) {
+            let task=localStorage.getItem(localStorage.key(i));
+            tasks.push(localStorage.key(i),task);
+        }
+        const fileSystem = require("browserify-fs")
+        const data = JSON.stringify(tasks)
+
+        fileSystem.writeFile("./newClient.json", data, err=>{
+        if(err){
+            console.log("Error writing file" ,err)
+        } else {
+            console.log('JSON data is written to the file successfully')
+        }
+        })
     }
 };
 

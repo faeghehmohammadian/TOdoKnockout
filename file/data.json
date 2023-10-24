@@ -5,7 +5,7 @@
     },
     {
         "todo": "Read about Java",
-        "completed": false
+        "completed": true
     },
     {
         "todo": "Read about C++",
