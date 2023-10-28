@@ -49,8 +49,12 @@ function todoappViewModel(){
     self.goToMenu('All');
 
     self.deleteTodo=function(todo){
-        localStorage.removeItem(todo.todoText);
+        //localStorage.removeItem(todo.todoText);
         self.todoList.remove(todo);
+        const tasks = JSON.parse(localStorage.getItem("todo"));
+        const Objindex = tasks.findIndex(obj =>(obj.todo == todo.todoText));
+        tasks.splice(Objindex, 1);
+        localStorage.setItem("todo",JSON.stringify(tasks));
     }
     self.editable=function(todo){
         this.isActive(false);
@@ -70,7 +74,7 @@ function todoappViewModel(){
                         objIndex = tasks.findIndex(obj =>(obj.todo == todo.todoText));
                         tasks[objIndex].completed = true;
                         localStorage.setItem("todo",JSON.stringify(tasks));
-                        
+
                     }
                 })
             };
