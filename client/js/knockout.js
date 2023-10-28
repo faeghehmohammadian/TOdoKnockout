@@ -74,16 +74,10 @@ function todoappViewModel(){
     }
     self.Reloadevent =document.addEventListener('DOMContentLoaded', function(e){
         e.preventDefault();
-        let tasks=[];
-        console.log("reload event")
-            // let task=localStorage.getItem("todo");
-            // tasks.push("todo",task);
-            // console.log(tasks)
-            // self.todoList.push(new todoModel(localStorage.key(i),JSON.parse(tasks[1])))
-            // tasks.pop(localStorage.key(i))
-            // tasks.pop(task)
-        
-        
+        const tasks=JSON.parse(localStorage.getItem('todo') || '[]');
+        tasks.forEach((el)=>{
+            self.todoList.push(new todoModel(el.todo,el.completed))
+        })        
     })
     self.downloadfunction=function(){
         const response=fetch("http://localhost:3000/download")
