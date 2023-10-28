@@ -64,11 +64,14 @@ function todoappViewModel(){
         this.isComplete(true);
         self.todoList().forEach(function (todo) {
             if(todo.isComplete()==true){
-                const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
-                // const found = tasks.find((task) => {
-                //     return task. == elemntId;
-                // });
-                localStorage.setItem("o",todo.isComplete())
+                const tasks = JSON.parse(localStorage.getItem("todo"));
+                tasks.forEach((task)=>{
+                    if(task.todo == todo.todoText){
+                        objIndex = tasks.findIndex(obj =>(obj.todo == todo.todoText));
+                        tasks[objIndex].completed = true;
+                        localStorage.setItem("todo",JSON.stringify(tasks));
+                    }
+                })
             };
         });
     }
@@ -107,15 +110,12 @@ var addToLocalStorageArray = function (todo, value) {
     if(localStorage.getItem('todo')=== null){
         id=1;
         tasks='[]';
-        console.log("miad if")
     }
     else{
         id=(JSON.parse(localStorage.getItem('todo'))).length;
         tasks=localStorage.getItem('todo');
-        console.log("miad else")
     }
         const todos=JSON.parse(tasks)
-        console.log(todos)
         todos.push(
             {
                 id:id,
@@ -123,9 +123,7 @@ var addToLocalStorageArray = function (todo, value) {
                 completed:value
             }
         );
-        console.log(todos)
         localStorage.setItem("todo",JSON.stringify(todos));
-        console.log(tasks)
     // }
 };
 
