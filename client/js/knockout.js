@@ -70,6 +70,7 @@ function todoappViewModel(){
                         objIndex = tasks.findIndex(obj =>(obj.todo == todo.todoText));
                         tasks[objIndex].completed = true;
                         localStorage.setItem("todo",JSON.stringify(tasks));
+                        
                     }
                 })
             };
