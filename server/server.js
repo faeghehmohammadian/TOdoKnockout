@@ -8,7 +8,6 @@ const server = express();
 server.use(bodyParser.urlencoded({extended:false}))
 server.use(bodyParser.json())
 server.use(express.static("C:/Users/mfaie/Documents/GitHub/TOdoKnockout/client"));
-
 server.listen(port, () => {
 console.log(`Server running on PORT: ${port}/`);
 });

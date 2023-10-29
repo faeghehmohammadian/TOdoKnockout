@@ -1,4 +1,3 @@
-
 function todoModel(todoText,CompleteStatus){
     var self=this;
     self.todoText=todoText;
@@ -55,14 +54,22 @@ function todoappViewModel(){
         const Objindex = tasks.findIndex(obj =>(obj.todo == todo.todoText));
         tasks.splice(Objindex, 1);
         localStorage.setItem("todo",JSON.stringify(tasks));
+        console.log(JSON.parse(localStorage.getItem('todo')).length)
     }
     self.editable=function(todo){
         this.isActive(false);
-        localStorage.removeItem(todo.todoText);
+        // localStorage.removeItem(todo.todoText);
     }
     self.saveItem=function(todo){
         this.isActive(true);
-        localStorage.setItem(todo.todoText,todo.isComplete())
+        //localStorage.setItem(todo.todoText,todo.isComplete())
+        console.log(todo)
+        const tasks = JSON.parse(localStorage.getItem("todo"));
+        const objIndex = tasks.findIndex(obj =>(obj.todo == todo.todoText));
+        console.log(typeof(todo.todoText))
+        console.log(tasks[objIndex].todo)
+        tasks[objIndex].todo = JSON.stringify("chengr");
+        localStorage.setItem("todo",JSON.stringify(tasks));
     }
     self.makeComplete=function(){
         this.isComplete(true);
@@ -83,18 +90,29 @@ function todoappViewModel(){
     self.Reloadevent =document.addEventListener('DOMContentLoaded', function(e){
         e.preventDefault();
         const tasks=JSON.parse(localStorage.getItem('todo') || '[]');
+        if(localStorage.getItem('todo') == '{}'){
+            console.log("az inja")
+        } else{
         tasks.forEach((el)=>{
             self.todoList.push(new todoModel(el.todo,el.completed))
-        })        
+
+        })       
+    } 
     })
     self.downloadfunction=function(){
         const response=fetch("http://localhost:3000/download")
-        .then(res=>res.json())
+        .then(res => res.json())
+        .then((json) => json.forEach((el)=>{
+            self.todoList.push(new todoModel(el.todo,el.completed))
+            localStorage.setItem("todo",JSON.stringify(json));
+        })  
+        )
         .catch(err=>console.warn(err))
-        console.log(response.name)
-    } 
+        
+    }
+        //localStorage.setItem("todo",JSON.stringify(response));
     self.uploadfunction=function(){
-        const data={name:"reza"};
+        const data=JSON.parse(localStorage.getItem('todo') || '[]')
         const response= fetch("http://localhost:3000/upload",{
         method:"POST",
         body:JSON.stringify(data),
@@ -103,7 +121,7 @@ function todoappViewModel(){
         },
         })
         .then(res=>res.json())
-        .then(err=>console.log(err));
+        .then(err=>console.warn(err));
         console.log(response);
     }
 }
@@ -112,7 +130,7 @@ ko.applyBindings(new todoappViewModel());
 var addToLocalStorageArray = function (todo, value) {
     var id;
     var tasks;
-    if(localStorage.getItem('todo')=== null){
+    if(localStorage.getItem('todo')=== null || localStorage.getItem('todo') == '{}'){
         id=1;
         tasks='[]';
     }
