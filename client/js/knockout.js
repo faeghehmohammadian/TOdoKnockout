@@ -58,18 +58,30 @@ function todoappViewModel(){
     }
     self.editable=function(todo){
         this.isActive(false);
-        // localStorage.removeItem(todo.todoText);
-    }
-    self.saveItem=function(todo){
-        this.isActive(true);
-        //localStorage.setItem(todo.todoText,todo.isComplete())
-        console.log(todo)
+        todo.isComplete(false);
         const tasks = JSON.parse(localStorage.getItem("todo"));
-        const objIndex = tasks.findIndex(obj =>(obj.todo == todo.todoText));
-        console.log(typeof(todo.todoText))
-        console.log(tasks[objIndex].todo)
-        tasks[objIndex].todo = JSON.stringify("chengr");
-        localStorage.setItem("todo",JSON.stringify(tasks));
+        const newtasks = tasks.filter(function (word) {
+            return word.todo !== todo.todoText;
+        });
+        //console.log(objIndex)
+        //tasks.splice(objIndex, 1);
+        
+        console.log(newtasks)
+        localStorage.setItem("todo",JSON.stringify(newtasks));
+    }
+    self.saveItem=function(todosave){
+        this.isActive(true);
+        addToLocalStorageArray(todosave.todoText,false)
+        //localStorage.setItem(todo.todoText,todo.isComplete())
+        
+        // objIndex = tasks.findIndex(obj =>(obj.todo == todosave.todoText));
+        // //(tasks[objIndex]).todo=(todo.todoText);
+        // console.log(objIndex)
+        // console.log(todosave.todoText)
+        // localStorage.setItem("todo",JSON.stringify(tasks));
+        
+            
+        
     }
     self.makeComplete=function(){
         this.isComplete(true);
