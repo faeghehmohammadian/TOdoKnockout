@@ -1,3 +1,5 @@
+let editentodo=-1;
+
 function todoModel(todoText,CompleteStatus){
     var self=this;
     self.todoText=todoText;
@@ -17,9 +19,7 @@ function todoappViewModel(){
             self.todoList.push(new todoModel(inputTodoText.value,false));
             addToLocalStorageArray(inputTodoText.value,false)
             inputTodoText.value='';
-            
         }
-
     }
     
     self.inputVisible=ko.observable(true);
@@ -61,24 +61,26 @@ function todoappViewModel(){
         todo.isComplete(false);
         const tasks = JSON.parse(localStorage.getItem("todo"));
         const newtasks = tasks.filter(function (word) {
-            return word.todo !== todo.todoText;
+            return word.todo == todo.todoText;
         });
-        //console.log(objIndex)
+        //console.log(tasks)
         //tasks.splice(objIndex, 1);
-        
-        console.log(newtasks)
-        localStorage.setItem("todo",JSON.stringify(newtasks));
+        editentodo=newtasks[0].todo;
+        localStorage.setItem("todo",JSON.stringify(tasks));
     }
     self.saveItem=function(todosave){
         this.isActive(true);
         addToLocalStorageArray(todosave.todoText,false)
         //localStorage.setItem(todo.todoText,todo.isComplete())
-        
-        // objIndex = tasks.findIndex(obj =>(obj.todo == todosave.todoText));
+        const tasks = JSON.parse(localStorage.getItem("todo"));
+        const finaltasks = tasks.filter(function (word) {
+            return word.todo != editentodo;
+        });
+        //objIndex = tasks.findIndex(obj =>(obj.todo == todosave.todoText));
         // //(tasks[objIndex]).todo=(todo.todoText);
-        // console.log(objIndex)
+        //console.log(finaltasks)
         // console.log(todosave.todoText)
-        // localStorage.setItem("todo",JSON.stringify(tasks));
+        localStorage.setItem("todo",JSON.stringify(finaltasks));
         
             
         
@@ -147,7 +149,7 @@ var addToLocalStorageArray = function (todo, value) {
         tasks='[]';
     }
     else{
-        id=(JSON.parse(localStorage.getItem('todo'))).length;
+        id=Math.floor(Math.random()*10000);
         tasks=localStorage.getItem('todo');
     }
         const todos=JSON.parse(tasks)
