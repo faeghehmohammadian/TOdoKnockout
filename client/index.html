@@ -22,8 +22,8 @@
     </div>
     <div class="List" data-bind="foreach:todoList " >
         <div data-bind="visible:isVisible">
-            <input id="inputs" data-bind="value:todoText ,
-                                    disable: isActive ,
+            <input id="inputs" data-bind="value:todoText,
+                                    disable: isActive,
                                     css:{completetodo:isComplete}
                                     ">
         <button id="Edit" data-bind="click:$parent.editable">Edit</button>
@@ -33,6 +33,6 @@
         </div>
     </div>
     <script src="js/knockout-3.5.1.js"></script>
-    <script src="js/knockout.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
